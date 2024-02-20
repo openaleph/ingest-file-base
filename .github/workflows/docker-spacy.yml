@@ -1,4 +1,4 @@
-name: Build ingest-file
+name: Build ingest-file-spacy
 
 on:
   workflow_dispatch: {}
@@ -21,7 +21,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/investigativedata/ingest-file-base
+          images: ghcr.io/investigativedata/ingest-file-spacy
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
@@ -41,6 +41,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: Dockerfile.spacy
           # platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
