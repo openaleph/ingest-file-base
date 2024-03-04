@@ -114,6 +114,9 @@ ENV LANG='en_US.UTF-8' \
     OMP_THREAD_LIMIT='1' \
     OPENBLAS_NUM_THREADS='1'
 
+# tesseract 5
+ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/5/tessdata
+
 RUN groupadd -g 1000 -r app \
     && useradd -m -u 1000 -s /bin/false -g app app
 
