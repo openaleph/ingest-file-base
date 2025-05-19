@@ -21,7 +21,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/investigativedata/ingest-file-base
+          images: ghcr.io/openaleph/ingest-file-base
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}

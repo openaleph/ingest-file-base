@@ -1,9 +1,9 @@
 FROM python:3.12-slim
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND="noninteractive"
 
-LABEL org.opencontainers.image.title "Base image for FollowTheMoney File Ingestors"
-LABEL org.opencontainers.image.licenses AGPL3
-LABEL org.opencontainers.image.source https://github.com/investigativedata/ingest-file-base
+LABEL org.opencontainers.image.title="Base image for FollowTheMoney File Ingestors"
+LABEL org.opencontainers.image.licenses="AGPL3"
+LABEL org.opencontainers.image.source="https://github.com/openaleph/ingest-file-base"
 
 # Enable non-free archive for `unrar`.
 RUN echo "deb http://http.us.debian.org/debian bookworm non-free" >/etc/apt/sources.list.d/nonfree.list
@@ -24,7 +24,9 @@ RUN apt-get -qq -y update \
     imagemagick-common imagemagick mdbtools djvulibre-bin \
     libtiff5-dev libjpeg-dev libfreetype6-dev libwebp-dev \
     libtiff-tools ghostscript librsvg2-bin jbig2dec \
-    pst-utils \
+    pst-utils libgif-dev \
+    # necessary for python-magic
+    libmagic1 \
     ### tesseract
     tesseract-ocr-eng \
     tesseract-ocr-swa \
@@ -129,6 +131,10 @@ RUN pip3 install --no-cache-dir --prefer-binary --upgrade setuptools wheel
 
 # Install spaCy 
 RUN pip3 install --no-cache-dir spacy
+# Install PyICU
+RUN pip3 install --no-binary=:pyicu: pyicu
+# Install TesserOCR
+RUN pip3 install --no-binary=:tesserocr: tesserocr
 
 # Install default (small) spaCy models
 RUN python3 -m spacy download en_core_web_sm
