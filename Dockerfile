@@ -129,7 +129,7 @@ RUN mkdir /models/ && \
 RUN pip3 install --no-cache-dir --prefer-binary --upgrade pip
 RUN pip3 install --no-cache-dir --prefer-binary --upgrade setuptools wheel
 
-# Install spaCy 
+# Install spaCy
 RUN pip3 install --no-cache-dir spacy
 # Install PyICU
 RUN pip3 install --no-binary=:pyicu: pyicu

@@ -2,10 +2,12 @@ name: Build ingest-file-base
 
 on:
   workflow_dispatch: {}
+  schedule:
+    - cron: "0 0 * * *"
   push:
     paths:
-      - Dockerfile
-      - .github/workflows/docker.yml
+      - Dockerfile.base
+      - .github/workflows/docker-base.yml
 
 permissions:
   packages: write
